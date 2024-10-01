@@ -8,6 +8,7 @@ public class SandwichShop {
         int sandwichPick = promptUserForPrice("Which sandwich type would you like? \n(1) Regular $5.45 || (2) Large $8.95: ");
         int userAge = promptUserForAge("Enter your age: ");
         double price = discountType(userAge, sandwichPick);
+        price = loadedOption("Would you like the loaded option ? (Y)es or (N)o: ", price);
         System.out.println("Please pay: $" + String.format("%.2f" , price ));
     }
 
@@ -16,6 +17,21 @@ public class SandwichShop {
         System.out.print(prompt);
         int sandwichPick = scanner.nextInt();
         return sandwichPick;
+    }
+
+    public static double loadedOption(String prompt, double newPrice){
+        System.out.print(prompt);
+        String userSelection = scanner.nextLine();
+
+        if(userSelection.equals("Y")||userSelection.equals("y")){
+            System.out.print("Pick between our (1) Regular option: $1.00 or (2) Large option: $1.75: ");
+            int loadedSelection = scanner.nextInt();
+            if(loadedSelection == 1) newPrice+=1.00;
+            else if (loadedSelection == 2) newPrice+=1.75;
+            else System.out.println("Selection available option, please!");
+        }
+
+        return newPrice;
     }
 
     public static int promptUserForAge(String prompt){
